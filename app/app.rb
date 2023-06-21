@@ -5,3 +5,6 @@ class Cat
     'mew'
   end
 end
+
+Cat.new.bowwow!
+Cat.jump
