@@ -1,0 +1,35 @@
+name: reviewdog
+on: [pull_request]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  steep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+      - uses: tk0miya/action-steep@v1
+        with:
+          use_bundler: true
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+      - name: Install Bundler
+        run: gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+      - name: Bundle install
+        run: bundle install --path=vendor/bundle --jobs 4 --retry 3
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          use_bundler: true
+          reporter: github-pr-review
