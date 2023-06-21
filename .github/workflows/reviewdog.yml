@@ -13,9 +13,6 @@ jobs:
           ruby-version: 3.2
           bundler-cache: true
       - uses: tk0miya/action-steep@main
-        with:
-          use_bundler: true
-          level: info
 
   rubocop:
     runs-on: ubuntu-latest
