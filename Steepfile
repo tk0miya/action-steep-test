@@ -1,10 +1,9 @@
 D = Steep::Diagnostic
 
 target :app do
-  signature "sig"
+  signature 'sig'
 
-  check "app"                       # Directory name
-  check "Gemfile"                   # File name
+  check 'app'                       # Directory name
 
-  configure_code_diagnostics(D::Ruby.lenient)      # `lenient` diagnostics setting
+  # configure_code_diagnostics(D::Ruby.strict)
 end
