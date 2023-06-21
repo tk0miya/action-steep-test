@@ -15,6 +15,7 @@ jobs:
       - uses: tk0miya/action-steep@main
         with:
           use_bundler: true
+          level: info
 
   rubocop:
     runs-on: ubuntu-latest
